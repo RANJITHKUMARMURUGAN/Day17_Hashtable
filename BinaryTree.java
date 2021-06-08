@@ -1,28 +1,86 @@
-package binary_tree;
+import java.util.Stack;
 
 public class BinaryTree {
-	//instance variable
-private TreeNode root;
 	
-	//TreeNode we create TreeNode class //
+private TreeNode root;
 	private class TreeNode {
 		private TreeNode left;
 		private TreeNode right;
-		private int data; 
-		
+		private int data;
+
 		public TreeNode(int data) {
 			this.data = data;
 		}
+	}
+		public void inOrder(TreeNode root) {
+			if(root == null) {
+				return;
+			}
+			
+			System.out.print(root.data + " ");
+			inOrder(root.left);
+			inOrder(root.right);
+		}
+
+		public void inOrder() {
+			if(root == null) {
+				return;
+			}
+
+			Stack<TreeNode> stack = new Stack<>();
+			TreeNode temp = root;
+
+			while(!stack.isEmpty() || temp != null) {
+				if(temp != null) {
+					stack.push(temp);
+					temp = temp.left;
+				} else {
+					temp = stack.pop();
+					System.out.print(temp.data + " ");
+					temp = temp.right;
+				}
+			}
+		}	
 		
 	public void createBinaryTree() {
 		TreeNode first = new TreeNode(56);
 		TreeNode second = new TreeNode(30);
 		TreeNode third = new TreeNode(70);
-		//root ---> first
+		TreeNode fourth = new TreeNode(22);
+		TreeNode fifth = new TreeNode(40);
+		TreeNode sixth = new TreeNode(60);
+		TreeNode seventh = new TreeNode(95);
+		TreeNode eight = new TreeNode(11);
+		TreeNode nine = new TreeNode(65);
+		TreeNode ten = new TreeNode(3);
+		TreeNode eleven = new TreeNode(16);
+		TreeNode twelve = new TreeNode(63);
+		TreeNode thirteen = new TreeNode(67);
+		
 		root = first;
 		first.left = second;
-		//second ---> first ---> third
 		first.right = third;
-		}
+		second.left = fourth;
+		second.right = fifth;
+		third.left = sixth;
+		third.right = seventh;
+		fourth.left = eight;
+		fourth.right = null;
+		fifth.left = null;
+		fifth.right = null;
+		sixth.left = null;
+		sixth.right = nine;
+		seventh.left = null;
+		seventh.right = null;
+		eight.left = ten;
+		eight.right = eleven;
+		nine.left = twelve;
+		nine.right = thirteen;
+	}
+	public static void main(String[] args) {
+		BinaryTree bt = new BinaryTree();
+		bt.createBinaryTree();
+		bt.inOrder();
+
 	}
 }
